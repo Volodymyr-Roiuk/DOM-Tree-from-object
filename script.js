@@ -19,10 +19,7 @@ let data = {
 const fishs = Object.keys(data['Рыбы']);
 const objTrees = data['Деревья'];
 
-
-let body = document.body;
-
-body.innerHTML = `
+document.body.innerHTML = `
   <ul>
     <li>Рыбы
       <ul>
