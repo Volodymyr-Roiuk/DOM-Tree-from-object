@@ -16,33 +16,22 @@ let data = {
   }
 };
 
-const fishs = Object.keys(data['Рыбы']);
-const objTrees = data['Деревья'];
 
 
-let body = document.body;
+function TreeFromObject(obj) {
+  const ul = document.createElement('ul');
+  for (const key in obj) {
+    let li = document.createElement('li');
+    li.textContent = key;
+    if (typeof obj[key] === 'object' && Object.keys(obj[key]).length > 0) {
+      li.appendChild(TreeFromObject(obj[key]));
+      console.log(li);
+    }
+    ul.appendChild(li);
+  }
+  return ul;  
+}
 
-body.innerHTML = `
-  <ul>
-    <li>Рыбы
-      <ul>
-        ${fishs.map(fish => `<li>${fish}</li>`).join('')}
-      </ul>
-    </li>Деревья
-      <ul>
-        <li>Огромные
-          <ul>
-          ${Object.keys(objTrees['Огромные']).map(tree => `<li>${tree}</li>`).join('')}
-          </ul>
-        </li>
-        <li>Цветковые
-          <ul>
-            ${Object.keys(objTrees['Цветковые']).map(tree => `<li>${tree}</li>`).join('')}
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-`;
+document.body.appendChild(TreeFromObject(data));
 
 
